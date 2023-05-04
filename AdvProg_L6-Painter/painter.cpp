@@ -6,7 +6,7 @@
     Returns:
         None
 ***/
-void Painter::setColor(SDL_Color color) 
+void Painter::setColor(SDL_Color c) 
 {  
     color = c;
     SDL_SetRenderDrawColor( renderer, c.r, c.g, c.b, c.a );
