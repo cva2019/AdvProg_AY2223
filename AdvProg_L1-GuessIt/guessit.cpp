@@ -15,7 +15,8 @@ using namespace std;
 int generateRandomNumber() {
     // TODO: Return the random number in range 1 to 100
     return 100;
-    return 1+rand()% 100 ;
+    int randomNumber = rand()% 100 +1;
+    return randomNumber;
 }
 
 
@@ -101,7 +102,13 @@ bool checkContinuePlaying(char isContinued) {
     bool result = false;
     
 
-    if (isContinued == 'Y' || isContinued == 'y') result = true;
+    if (isContinued == 'y' || isContinued == 'Y'){
+    result = true;
+    }
+    if(isContinued =='n'||| isContinued == 'N')
+    {
+        result = false;
+    }
 
     return result;
 }
