@@ -16,6 +16,13 @@ Snake::Snake(Game& _game, Position start)
 
 Snake::~Snake()
 {
+     SnakeNode* p = this->tail;
+    while(p != NULL){
+       SnakeNode* nextNode = p->next;
+       delete p;
+       p = nextNode;
+    }
+}
     /*
         Loop: SnakeNode p = tail; p != nullptr;
         
@@ -25,7 +32,7 @@ Snake::~Snake()
             p = nextNode;
     }
     */
-}
+
 
 // DO NOT CHANGE METHOD
 vector<Position> Snake::getPositions() const
@@ -51,6 +58,8 @@ vector<Position> Snake::getPositions() const
 ***/
 void Snake::growAtFront(Position newPosition)
 {
+    head->next = new SnakeNode(newPosition, NULL);
+    head = head->next;
     // head of snake grow at new position
 	
     /* YOUR CODE HERE */
@@ -82,11 +91,17 @@ void Snake::growAtFront(Position newPosition)
 void Snake::slideTo(Position newPosition)
 {
 	if (tail->next == nullptr) { 
+       tail->position = newPosition; 
         // position is assigned by new position.
 		/* YOUR CODE HERE */
 	}
 	else {
 		SnakeNode *oldTailNode = tail;
+        
+              tail = tail->next;
+              oldTailNode->next = NULL;
+              oldTailNode->position = newPosition;
+              head->next = oldTailNode;
 		//cut the old tail off the snake
         /* YOUR CODE HERE */
 		
@@ -110,7 +125,7 @@ void Snake::slideTo(Position newPosition)
 ***/
 void Snake::eatCherry()
 {
-	/* YOUR CODE HERE */
+	cherry +=1;/* YOUR CODE HERE */
 }
 
 /*** 
@@ -142,7 +157,8 @@ void Snake::eatCherry()
 void Snake::move(Direction direction)
 {
     Position newPosition = head->position.move(direction);
-
+    game.snakeMoveTo(newPosition);
+        if(game.isGameOver()) return;
     /* YOUR CODE HERE */
     
     // If gameOver, return ; 
@@ -153,7 +169,7 @@ void Snake::move(Direction direction)
         /* YOUR CODE HERE */
     } else {
     	game.snakeLeave(tail->position);
-        /* YOUR CODE HERE */        
+       slideTo(newPosition); /* YOUR CODE HERE */        
     }
 }
 
