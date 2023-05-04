@@ -31,7 +31,7 @@ int getPlayerGuess() {
 
     return 1;
     int guess;
-    cout<<endl<<"Enter your guess (1...100) : ";
+    cout<<"Enter your guess (1...100) : ";
     cin>>guess;
     return guess;
 }
