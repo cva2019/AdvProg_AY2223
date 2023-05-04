@@ -137,20 +137,6 @@ bool Game::canChange(Direction current, Direction next) const {
 }
 
 
-/***
- * PLEASE REPLACE LINES MARKED WITH '// YOUR CODE HERE'
- * 
- * Iterover the input queue from keyboard. 
- * For each input direction, check whether snake can move or not.
- * If the snake can move,  set currentDiection as this input direction.
- * Otherwise, go to the next input direction from input queue
- * 
- * Args:
- * 		// none
- * Returns:
- * 		// none
- * 
- ***/
 
 void Game::nextStep()
 {
