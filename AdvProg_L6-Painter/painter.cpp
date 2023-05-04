@@ -1,5 +1,5 @@
 #include "painter.h"
-
+#include <math.h>
 /***
     Args: color (SDL_Color): color value 
         
@@ -7,7 +7,10 @@
         None
 ***/
 void Painter::setColor(SDL_Color color) 
-{ 
+{  
+    color = c;
+    SDL_SetRenderDrawColor( renderer, c.r, c.g, c.b, c.a );
+
     // TODO: set the color value for the Painter and set Render Draw Color
 }
 
@@ -20,6 +23,11 @@ void Painter::setColor(SDL_Color color)
 ***/
 void Painter::jumpForward(int numPixel)
 {
+   double rad = M_PI*angle/180;
+    int diffX = numPixel*cos(rad);
+    int diffY = -numPixel*sin(rad);
+    x = x + diffX;
+    y = y + diffY;  
     // TODO: jump the painter forward
 }
 
@@ -32,6 +40,11 @@ void Painter::jumpForward(int numPixel)
 ***/
 void Painter::jumpBackward(int numPixel)
 {
+     double rad = M_PI*angle/180;
+    int diffX = -numPixel*cos(rad);
+    int diffY = numPixel*sin(rad);
+    x = x + diffX;
+    y = y + diffY;
     // TODO: jump the painter backward
 }
 
@@ -44,7 +57,8 @@ void Painter::jumpBackward(int numPixel)
 ***/       
 void Painter::turnLeft(double degree)
 {
-    // TODO: rotate left the painter   
+   angle = (angle + degree);
+    if(angle >= 360){angle -= 360;} // TODO: rotate left the painter   
 }
 
 
@@ -56,7 +70,8 @@ void Painter::turnLeft(double degree)
 ***/     
 void Painter::turnRight(double degree)
 {
-    // TODO: rotate right the painter   
+  angle = (angle - degree);
+    if(angle >= 360){angle -= 360;}  // TODO: rotate right the painter   
 }
 
 /***  
@@ -67,7 +82,7 @@ void Painter::turnRight(double degree)
 ***/
 void Painter::randomColor()
 {
-    // TODO: set random color    
+    SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF ); // TODO: set random color    
 }
 
 
